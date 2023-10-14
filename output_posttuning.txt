@@ -1,0 +1,33 @@
+        X     Y     Z  Step
+0    9.38  3.06  0.50     1
+1    9.38  3.06  0.51     1
+2    9.38  3.06  0.52     1
+3    9.38  3.06  0.53     1
+4    9.38  3.06  0.54     1
+..    ...   ...   ...   ...
+855 -1.00  3.06  1.89    13
+856 -1.00  3.06  1.90    13
+857 -1.00  3.06  1.91    13
+858 -1.00  3.06  1.92    13
+859 -1.00  3.06  1.93    13
+
+[860 rows x 4 columns]
+X correlation with Step is:  -0.76
+Y correlation with Step is:  0.29
+Z correlation with Step is:  0.1970736986369126
+Model 1 training MAE is:  1.13
+Model 2 training MAE is:  0.11
+Model 3 training MAE is:  0.16
+Model 1 Mean Absolute Error (CV): 1.18
+Model 2 Mean Absolute Error (CV): 0.04
+Model 3 Mean Absolute Error (CV): 0.03
+The accuracy score for Model 1 is: 0.24
+The precision score for Model 1 is: 0.35
+The F1 score for Model 1 is: 0.26
+The accuracy score for Model 2 is: 0.9
+The precision score for Model 2 is: 0.91
+The F1 score for Model 2 is: 0.89
+The accuracy score for Model 3 is: 0.8430232558139535
+The precision score for Model 3 is: 0.874750298151461
+The F1 score for Model 3 is: 0.8320008764605209
+The predicted values are:  [ 5.  9. 13.  6.  4.]
