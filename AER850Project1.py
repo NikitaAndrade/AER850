@@ -32,7 +32,7 @@ columns_list = train_X.columns.tolist()
 #-----2.2 Data Visualization-----
 attributes = ["X", "Y", "Z","Step"]
 pd.plotting.scatter_matrix(df[attributes], figsize=(12, 8))
-plt.savefig("C:/Users/Owner/Documents/Python/statstest/Plots/Data Visualization.png")
+plt.savefig("C:/Users/Owner/Documents/Python/GitHub/Plots/Data Visualization.png")
 plt.show()
 #Using the Data Visualization method of scatter plot matrix, no corelation is found between the variables. 
 
@@ -42,17 +42,17 @@ correlation_matrix = df.corr()
 print(correlation_matrix)
 plt.title('Pearson Correlation Matrix')
 sns.heatmap(np.abs(correlation_matrix), annot=True)
-plt.savefig("C:/Users/Owner/Documents/Python/statstest/Plots/Pearson's Correlation Matrix.png")
+plt.savefig("C:/Users/Owner/Documents/Python/GitHub/Plots/Pearson's Correlation Matrix.png")
 colormap = plt.get_cmap()
 colormap_name = colormap.name
 print(colormap_name)
 plt.show()
 corr1 = np.corrcoef(df['X'], df['Step'])
-print("X correlation wiht Step is: ", corr1[0,1])
+print("X correlation with Step is: ", round(corr1[0,1],2))
 corr1 = np.corrcoef(df['Y'], df['Step'])
-print("Y correlation wiht Step is: ", corr1[0,1])
+print("Y correlation with Step is: ", round(corr1[0,1],2))
 corr1 = np.corrcoef(df['Z'], df['Step'])
-print("Z correlation wiht Step is: ", corr1[0,1])
+print("Z correlation with Step is: ", corr1[0,1])
 
 
 #-----2.4 Classification Model Development/Engineering-----
@@ -72,8 +72,8 @@ print("Model 1 training MAE is: ", round(model1_train_mae,2))
 
 
 #Model 2: Random Forest Regressor 
-# model2 = RandomForestRegressor(n_estimators=30, random_state=16) #Pre Grid Search
-model2 = RandomForestRegressor(max_depth = None, max_features = 'sqrt', min_samples_leaf= 1, min_samples_split= 10, n_estimators=30, random_state=16)
+model2 = RandomForestRegressor(n_estimators=10, random_state=16) #Pre Grid Search
+# model2 = RandomForestRegressor(max_depth = None, max_features = 'sqrt', min_samples_leaf= 1, min_samples_split= 10, n_estimators=30, random_state=16)
 model2.fit(train_X, train_y)
 model2_predictions = model2.predict(train_X)
 model2_train_mae = mean_absolute_error(model2_predictions, train_y)
@@ -82,8 +82,8 @@ print("Model 2 training MAE is: ", round(model2_train_mae,2))
 
 
 #Model 3: Decision Tree Regressor
-# model3= DecisionTreeRegressor() #Pre Grid Search
-model3 = DecisionTreeRegressor(criterion='absolute_error', max_depth=10, max_features='log2', max_leaf_nodes=None, min_impurity_decrease=0.0, min_samples_leaf=4, min_samples_split=5)
+model3= DecisionTreeRegressor() #Pre Grid Search
+# model3 = DecisionTreeRegressor(criterion='absolute_error', max_depth=10, max_features='log2', max_leaf_nodes=None, min_impurity_decrease=0.0, min_samples_leaf=4, min_samples_split=5)
 model3.fit(train_X, train_y)
 model3_predictions = model3.predict(train_X)
 model3_train_mae = mean_absolute_error(model3_predictions, train_y)
@@ -168,7 +168,7 @@ sns.heatmap(cm1, annot=True, fmt='d', xticklabels=class_labels, yticklabels=clas
 plt.title('Confusion Matrix for Model 1')
 plt.xlabel('Predicted Step Value')
 plt.ylabel('Actual Step Value')
-plt.savefig("C:/Users/Owner/Documents/Python/statstest/Plots/Confusion Matrix for Model 1")
+plt.savefig("C:/Users/Owner/Documents/Python/GitHub/Plots/Confusion Matrix for Model 1")
 plt.show()
 
 
@@ -188,7 +188,7 @@ sns.heatmap(cm2, annot=True, fmt='d', xticklabels=class_labels, yticklabels=clas
 plt.title('Confusion Matrix for Model 2')
 plt.xlabel('Predicted Step Value')
 plt.ylabel('Actual Step Value')
-plt.savefig("C:/Users/Owner/Documents/Python/statstest/Plots/Confusion Matrix for Model 2")
+plt.savefig("C:/Users/Owner/Documents/Python/GitHub/Plots/Confusion Matrix for Model 2")
 plt.show()
 
 #Model 3
@@ -207,7 +207,7 @@ sns.heatmap(cm3, annot=True, fmt='d', xticklabels=class_labels, yticklabels=clas
 plt.title('Confusion Matrix for Model 3')
 plt.xlabel('Predicted Step Value')
 plt.ylabel('Actual Step Value')
-plt.savefig("C:/Users/Owner/Documents/Python/statstest/Plots/Confusion Matrix for Model 3")
+plt.savefig("C:/Users/Owner/Documents/Python/GitHub/Plots/Confusion Matrix for Model 3")
 plt.show()
 
 #-----2.6: Model Evaluation-----
