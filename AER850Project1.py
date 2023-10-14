@@ -5,12 +5,12 @@ import math
 import seaborn as sns
 import joblib
 from sklearn.model_selection import StratifiedShuffleSplit
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import cross_val_score, GridSearchCV
-from sklearn.metrics import mean_absolute_error, accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+from sklearn.metrics import mean_absolute_error, accuracy_score, precision_score, f1_score, confusion_matrix
 
 #-----2.1 Data Processing-----
 data_path = 'data\Project 1 Data.csv'
@@ -34,6 +34,7 @@ attributes = ["X", "Y", "Z","Step"]
 pd.plotting.scatter_matrix(df[attributes], figsize=(12, 8))
 plt.savefig("C:/Users/Owner/Documents/Python/GitHub/Plots/Data Visualization.png")
 plt.show()
+
 #Using the Data Visualization method of scatter plot matrix, no corelation is found between the variables. 
 
 #-----2.3 Corelation Analysis-----
@@ -60,10 +61,6 @@ print("Z correlation with Step is: ", corr1[0,1])
 model1 = LinearRegression()
 model1.fit(train_X, train_y)
 
-some_data = train_X.iloc[:10]
-some_data.columns = train_X.columns
-some_house_values = train_y.iloc[:10]
-
 model1_prediction = model1.predict(train_X)
 from sklearn.metrics import mean_absolute_error
 model1_train_mae = mean_absolute_error(model1_prediction, train_y)
@@ -72,8 +69,8 @@ print("Model 1 training MAE is: ", round(model1_train_mae,2))
 
 
 #Model 2: Random Forest Regressor 
-model2 = RandomForestRegressor(n_estimators=10, random_state=16) #Pre Grid Search
-# model2 = RandomForestRegressor(max_depth = None, max_features = 'sqrt', min_samples_leaf= 1, min_samples_split= 10, n_estimators=30, random_state=16)
+# model2 = RandomForestRegressor(n_estimators=10, random_state=16) #Pre Grid Search
+model2 = RandomForestRegressor(max_depth = None, max_features = 'sqrt', min_samples_leaf= 1, min_samples_split= 10, n_estimators=30, random_state=16)
 model2.fit(train_X, train_y)
 model2_predictions = model2.predict(train_X)
 model2_train_mae = mean_absolute_error(model2_predictions, train_y)
@@ -82,8 +79,8 @@ print("Model 2 training MAE is: ", round(model2_train_mae,2))
 
 
 #Model 3: Decision Tree Regressor
-model3= DecisionTreeRegressor() #Pre Grid Search
-# model3 = DecisionTreeRegressor(criterion='absolute_error', max_depth=10, max_features='log2', max_leaf_nodes=None, min_impurity_decrease=0.0, min_samples_leaf=4, min_samples_split=5)
+# model3= DecisionTreeRegressor() #Pre Grid Search
+model3 = DecisionTreeRegressor(criterion='absolute_error', max_depth=10, max_features='log2', max_leaf_nodes=None, min_impurity_decrease=0.0, min_samples_leaf=4, min_samples_split=5)
 model3.fit(train_X, train_y)
 model3_predictions = model3.predict(train_X)
 model3_train_mae = mean_absolute_error(model3_predictions, train_y)
@@ -106,7 +103,7 @@ scores_model3 = cross_val_score(model3, train_X, train_y, cv=5, scoring='neg_mea
 mae_model3 = -scores_model3.mean()
 print("Model 3 Mean Absolute Error (CV):", round(mae_model3, 2))
 
-#GirdSearchCV for Model 1
+#GridSearchCV for Model 1
 param_grid = {
     'fit_intercept': [True, False]
 }
@@ -129,7 +126,7 @@ best_params = grid_search.best_params_
 print("Best Hyperparameters for Model 2:", best_params)
 best_model2 = grid_search.best_estimator_
 
-#GridSearchCv for Model 3
+#GridSearchCV for Model 3
 param_grid = {
     'criterion': ['friedman_mse', 'poisson', 'absolute_error', 'squared_error'],
     'max_depth': [None, 10, 20, 30],
